@@ -1,0 +1,2 @@
+hellwigs-method-for-jacek
+=========================
