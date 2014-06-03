@@ -1,0 +1,19 @@
+{
+  "name": "hellwigs-method-for-jacek",
+  "version": "0.0.0",
+  "description": "hellwigs-method-for-jacek =========================",
+  "main": "main.js",
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mmocny/hellwigs-method-for-jacek.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmocny/hellwigs-method-for-jacek/issues"
+  },
+  "homepage": "https://github.com/mmocny/hellwigs-method-for-jacek"
+}
