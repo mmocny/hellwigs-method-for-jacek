@@ -1,32 +1,30 @@
 var assert = require('assert');
 
 module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y) {
-  var combinations = require('./combinations');
+  var combinationsStream = require('./combinations-stream');
   var wyniki = [];
 
   for (var a = 1; a <= variables.length; ++a) {
-    var comb_var_a = combinations(variables, a);
-
-    for (var b = 1; b <= comb_var_a.length; ++b) {
-      if (a == 1) {
-        wyniki.push(Math.pow(correlation_y[comb_var_a[b-1][0]-1],2));
+    combinationsStream(variables, a, function(combination) {
+      if (combination.length == 1) {
+        wyniki.push(Math.pow(correlation_y[combination[0]-1], 2));
       } else {
         var poj_wspolna = 0;
         var d = 0;
-        while (d < comb_var_a[b-1].length) {
+        while (d < combination.length) {
           var mianownik = 0;
-          for (var i = 0; i < comb_var_a[b-1].length; i++) {
-            mianownik += Math.abs(correlation[comb_var_a[b-1][d]-1][comb_var_a[b-1][i]-1]);
+          for (var i = 0; i < combination.length; i++) {
+            mianownik += Math.abs(correlation[combination[d]-1][combination[i]-1]);
           }
-          var poj_ind = Math.pow(correlation_y[comb_var_a[b-1][d]-1],2) / mianownik;
+          var poj_ind = Math.pow(correlation_y[combination[d]-1],2) / mianownik;
           poj_wspolna += poj_ind;
           d++;
-          if (d == comb_var_a[b-1].length) {
+          if (d == combination.length) {
             wyniki.push(poj_wspolna);
           }
         }
       }
-    }
+    });
   }
 
   return wyniki;
