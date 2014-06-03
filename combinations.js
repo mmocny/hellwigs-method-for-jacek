@@ -1,49 +1,54 @@
-/*
-$var = array(1,2,3);
-$result = array(); 
-$combination = array();
-$corr_y = array(10,12,14);
- 
-function inner ($start, $choose_, $arr, $n) {
-    global $result, $combination;
-    if ($choose_ == 0) array_push($result,$combination);
-    else for ($i = $start; $i <= $n - $choose_; ++$i) {
-           array_push($combination, $arr[$i]);
-           inner($i + 1, $choose_ - 1, $arr, $n);
-           array_pop($combination);
-     }
-  }
- 
-function combinations(array $myArray, $choose) {
-  global $result, $combination;
-  $result=array();
-  $n = count($myArray);
-  inner(0, $choose, $myArray, $n);
-  //echo $result[0][0]."  ".$result[0][1];
-  return $result;
-}
- */
-
 var assert = require('assert');
 
-module.exports = exports = function combinations(arr, choose) {
+/*
+ * TODO: Replace this with a node library which is faster!
+ * TODO: Benchmark!
+ */
+module.exports = exports = function combinations(arr, size) {
   var result = [], combination = [];
 
-  function inner(start, choose) {
-    if (choose == 0) {
-      result.push(combination);
+  function inner(start, size) {
+    if (size == 0) {
+      result.push(combination.slice(0)); // slice(0) takes a deep copy of the array
     } else {
-      for (var i = start; i <= (arr.length - choose); ++i) {
+      for (var i = start; i <= (arr.length - size); ++i) {
         combination.push(arr[i]);
-        inner(i + 1, choose - 1, arr);
+        inner(i + 1, size - 1, arr);
         combination.pop();
       }
     }
   }
-  inner(0, choose);
+  inner(0, size);
 
   assert.ok(combination.length == 0);
-  console.log(result);
 
   return result;
+}
+
+// TESTS!
+exports.tests = function testCombinations() {
+  var combinations = exports;
+
+  var input = [1,2,3];
+  var outputForSize = [0,1,2,3,4].map(function(size) {
+    return combinations(input, size);
+  });
+
+  assert.deepEqual(outputForSize[0], [[]]);
+  assert.deepEqual(outputForSize[1], [[1],[2],[3]]);
+  assert.deepEqual(outputForSize[2], [[1,2],[1,3],[2,3]]);
+  assert.deepEqual(outputForSize[3], [[1,2,3]]);
+  assert.deepEqual(outputForSize[4], []);
+
+  input = [1,2,3,4];
+  outputForSize = [0,1,2,3,4,5].map(function(size) {
+    return combinations(input, size);
+  });
+
+  assert.deepEqual(outputForSize[0], [[]]);
+  assert.deepEqual(outputForSize[1], [[1],[2],[3],[4]]);
+  assert.deepEqual(outputForSize[2], [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]);
+  assert.deepEqual(outputForSize[3], [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]);
+  assert.deepEqual(outputForSize[4], [[1,2,3,4]]);
+  assert.deepEqual(outputForSize[5], []);
 }
