@@ -57,6 +57,26 @@ function hellwig($correlation, $variables,$correlation_y)
 
 */
 
+var result = [], combination = [];
+
+function inner(start, choose, arr) {
+  if (choose == 0) {
+    result = result.concat(combination);
+  } else {
+    for (var i = start; i <= (arr.length - choose); ++i) {
+      combination.push(arr[i]);
+      inner(i + 1, choose - 1, arr);
+      combination.pop();
+    }
+  }
+}
+
+function combinations(myArray, choose) {
+  result = [];
+  inner(0, choose, myArray);
+  return result;
+}
+
 module.exports = function hellwigsMethod(correlation, variables, correlation_y) {
   return [];
 };
