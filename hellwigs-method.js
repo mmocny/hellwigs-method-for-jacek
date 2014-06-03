@@ -2,32 +2,33 @@ var assert = require('assert');
 
 module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y) {
   var combinationsStream = require('./combinations-stream');
-  var wyniki = [];
+  var ret = [];
 
-  for (var a = 1; a <= variables.length; ++a) {
-    combinationsStream(variables, a, function(combination) {
-      if (combination.length == 1) {
-        wyniki.push(Math.pow(correlation_y[combination[0]-1], 2));
-      } else {
-        var poj_wspolna = 0;
-        var d = 0;
-        while (d < combination.length) {
-          var mianownik = 0;
-          for (var i = 0; i < combination.length; i++) {
-            mianownik += Math.abs(correlation[combination[d]-1][combination[i]-1]);
-          }
-          var poj_ind = Math.pow(correlation_y[combination[d]-1],2) / mianownik;
-          poj_wspolna += poj_ind;
-          d++;
-          if (d == combination.length) {
-            wyniki.push(poj_wspolna);
-          }
+  /*
+  for (var i = 0; i < variables.length; ++i) {
+    ret.push(Math.pow(correlation_y[variables[i]-1], 2));
+  }*/
+
+  // Optimization for 1-length combinations
+  combinationsStream(variables, 1, function(combination) {
+    ret.push(Math.pow(correlation_y[combination[0]-1], 2))
+  });
+
+  for (var size = 2; size <= variables.length; ++size) {
+    combinationsStream(variables, size, function(combination) {
+      var poj_wspolna = 0;
+      for (var d = 0; d < size; ++d) {
+        var mianownik = 0;
+        for (var i = 0; i < size; i++) {
+          mianownik += Math.abs(correlation[combination[d]-1][combination[i]-1]);
         }
+        poj_wspolna += Math.pow(correlation_y[combination[d]-1],2) / mianownik;
       }
+      ret.push(poj_wspolna);
     });
   }
 
-  return wyniki;
+  return ret;
 };
 
 exports.tests = function testHellwigs() {
