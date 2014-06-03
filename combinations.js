@@ -43,6 +43,7 @@ module.exports = exports = function combinations(arr, choose) {
   inner(0, choose);
 
   assert.ok(combination.length == 0);
+  console.log(result);
 
   return result;
 }
