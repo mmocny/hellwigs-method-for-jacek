@@ -14,5 +14,6 @@
   "bugs": {
     "url": "https://github.com/mmocny/hellwigs-method-for-jacek/issues"
   },
-  "homepage": "https://github.com/mmocny/hellwigs-method-for-jacek"
+  "homepage": "https://github.com/mmocny/hellwigs-method-for-jacek",
+  "dependencies": {}
 }
