@@ -1,24 +1,5 @@
 /*
 
-function inner ($start, $choose_, $arr, $n) {
-    global $result, $combination;
-    if ($choose_ == 0) array_push($result,$combination);
-    else for ($i = $start; $i <= $n - $choose_; ++$i) {
-           array_push($combination, $arr[$i]);
-           inner($i + 1, $choose_ - 1, $arr, $n);
-           array_pop($combination);
-     }
-  }
-
-function combinations(array $myArray, $choose) {
-  global $result;
-  $result=array();
-  $n = count($myArray);
-  inner(0, $choose, $myArray, $n);
-  //echo $result[0][0]."  ".$result[0][1];
-  return $result;
-}
-
 function hellwig($correlation, $variables,$correlation_y)
   {
   $wyniki = array();
@@ -57,26 +38,11 @@ function hellwig($correlation, $variables,$correlation_y)
 
 */
 
-var result = [], combination = [];
+module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y) {
+  var combinations = require('./combinations');
 
-function inner(start, choose, arr) {
-  if (choose == 0) {
-    result = result.concat(combination);
-  } else {
-    for (var i = start; i <= (arr.length - choose); ++i) {
-      combination.push(arr[i]);
-      inner(i + 1, choose - 1, arr);
-      combination.pop();
-    }
+  for (var a = 1; a <= variables.length; ++a) {
+    console.log(combinations(variables, a));
   }
-}
-
-function combinations(myArray, choose) {
-  result = [];
-  inner(0, choose, myArray);
-  return result;
-}
-
-module.exports = function hellwigsMethod(correlation, variables, correlation_y) {
   return [];
 };
