@@ -15,5 +15,7 @@
     "url": "https://github.com/mmocny/hellwigs-method-for-jacek/issues"
   },
   "homepage": "https://github.com/mmocny/hellwigs-method-for-jacek",
-  "dependencies": {}
+  "dependencies": {
+    "progress": "^1.1.5"
+  }
 }

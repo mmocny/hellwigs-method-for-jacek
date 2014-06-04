@@ -1,5 +1,3 @@
-var assert = require('assert');
-
 // http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
 /**
  * Returns a random number between min (inclusive) and max (exclusive)
@@ -33,6 +31,7 @@ module.exports = exports = function generateDummyInput(n) {
 }
 
 exports.tests = function generateDummyInputTests() {
+  var assert = require('assert');
   var generateDummyInput = exports;
 
   [1,2,3,4,5,6,7,8,9,10,20,100].forEach(function(n) {
