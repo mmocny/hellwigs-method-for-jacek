@@ -28,7 +28,8 @@ for (var n = 10; n <= 26; n++) {
       width: 40,
     });
   benchmark('hellwigs for n = ' + n, function() {
-    var result = hellwig.apply(null, genDummyInput(n).concat(function(value) {
+    hellwig.apply(null, genDummyInput(n).concat(function(value) {
+      // TODO: Track MAX
     }, function() {
       progressBar.tick();
     }));

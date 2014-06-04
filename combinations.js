@@ -18,8 +18,6 @@ module.exports = exports = function combinations(arr, size) {
   }
   inner(0, size);
 
-  assert.ok(combination.length == 0);
-
   return result;
 }
 
