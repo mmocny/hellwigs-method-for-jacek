@@ -1,7 +1,5 @@
-module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y) {
+module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y, emit, onprogress) {
   var combinationsStream = require('./combinations-stream');
-  var ret = [];
-
   function inner(combination) {
     var poj_wspolna = 0;
     for (var d = 0; d < combination.length; ++d) {
@@ -17,14 +15,13 @@ module.exports = exports = function hellwigsMethod(correlation, variables, corre
   for (var size = 1; size <= variables.length; ++size) {
     combinationsStream(variables, size, function(combination) {
       if (combination.length == 1) {
-        ret.push(Math.pow(correlation_y[combination[0]-1], 2));
+        emit(Math.pow(correlation_y[combination[0]-1], 2));
       } else {
-        ret.push(inner(combination));
+        emit(inner(combination));
       }
     });
+    onprogress();
   }
-
-  return ret;
 };
 
 exports.tests = function testHellwigs() {
