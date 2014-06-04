@@ -1,4 +1,4 @@
-module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y, onprogress) {
+module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y) {
   var combinationsStream = require('./combinations-stream');
   var ret = [];
 
@@ -21,9 +21,7 @@ module.exports = exports = function hellwigsMethod(correlation, variables, corre
       } else {
         ret.push(inner(combination));
       }
-      // onprogress();
     });
-    onprogress();
   }
 
   return ret;

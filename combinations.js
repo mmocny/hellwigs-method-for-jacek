@@ -1,5 +1,3 @@
-var assert = require('assert');
-
 /*
  * TODO: Replace this with a node library which is faster!
  * TODO: Benchmark!
@@ -27,6 +25,8 @@ module.exports = exports = function combinations(arr, size) {
 
 // TESTS!
 exports.tests = function testCombinations() {
+  var assert = require('assert');
+
   var combinations = exports;
 
   var input = [1,2,3];

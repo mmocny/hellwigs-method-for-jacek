@@ -1,5 +1,3 @@
-var assert = require('assert');
-
 /*
  * TODO: Replace this with a node library which is faster!
  * TODO: Benchmark!
@@ -19,12 +17,12 @@ module.exports = exports = function combinationsStream(arr, size, f) {
     }
   }
   inner(0, size);
-
-  assert.ok(combination.length == 0);
 }
 
 // TESTS!
 exports.tests = function testCombinations() {
+  var assert = require('assert');
+
   var combinationsStream = exports;
 
   var input = [1,2,3];
