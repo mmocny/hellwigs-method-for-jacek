@@ -5,6 +5,7 @@
 #include <cmath>
 #include <random>
 #include <tuple>
+#include <chrono>
 
 auto combinationsStream = [](auto const& arr, auto size, auto const& emit) {
   std::decay_t<decltype(arr)> combination;
@@ -121,10 +122,12 @@ void testGenerateDummyInput() {
 }
 
 auto benchmark = [](auto const& label, auto const& f) {
+  auto start = std::chrono::steady_clock::now();
   f();
-  std::cout << label << " took TODO" << std::endl;
+  auto end = std::chrono::steady_clock::now();
+  auto durationMs = std::chrono::duration_cast<std::chrono::duration<int,std::milli>>(end-start).count();
+  std::cout << label << " took: " << durationMs << "ms" << std::endl;
 };
-
 
 void runBenchmark() {
   for (auto n = 10; n <= 26; n++) {
@@ -135,7 +138,6 @@ void runBenchmark() {
       auto v = std::get<1>(d);
       auto corr_y = std::get<2>(d);
       hellwigsMethod(corr, v, corr_y, [](auto const&){});
-      std::cout << "Done " << n << std::endl;
     });
   }
 }
