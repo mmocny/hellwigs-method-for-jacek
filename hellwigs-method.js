@@ -1,5 +1,6 @@
 module.exports = exports = function hellwigsMethod(correlation, variables, correlation_y, emit, onprogress) {
   var combinationsStream = require('./combinations-stream');
+  emit = emit || console.log.bind(console);
   onprogress = onprogress || function(){};
 
   function hellwigsValueFor(combination) {
@@ -18,7 +19,7 @@ module.exports = exports = function hellwigsMethod(correlation, variables, corre
   // Iterate all possible combinations of `variables`, for each combination set size k
   for (var k = 1; k <= variables.length; ++k) {
     combinationsStream(variables, k, function(combination) {
-      emit(hellwigsValueFor(combination),combination);
+      emit(hellwigsValueFor(combination), combination.slice());
     });
     onprogress();
   }
