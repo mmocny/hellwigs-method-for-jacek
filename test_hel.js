@@ -38,7 +38,7 @@ var c=0;
 hellwigs(input_1, input_2, input_3, function(value, combination) {
   if(value > a) {
     a = value;
-    c = combination.slice();
+    c = combination; // you don't need slice any more, I changed the definition to copy
     console.log(a, c);
   }
 });
