@@ -18,7 +18,7 @@ module.exports = exports = function hellwigsMethod(correlation, variables, corre
   // Iterate all possible combinations of `variables`, for each combination set size k
   for (var k = 1; k <= variables.length; ++k) {
     combinationsStream(variables, k, function(combination) {
-      emit(hellwigsValueFor(combination));
+      emit(hellwigsValueFor(combination),combination);
     });
     onprogress();
   }
